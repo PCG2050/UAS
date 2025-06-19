@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:handlers="clr-namespace:UAS.Handlers"
+             x:Class="UAS.Views.SignUpPage"
+             xmlns:constants="clr-namespace:UAS.Constants"
+             Title="Sign Up">
+    <Grid>
+        <!-- Background Image -->
+        <Image Source="{x:Static constants:Constants.MainBackgroundImage}" Aspect="AspectFill" Opacity="0.9"  />
+
+        <!-- Foreground Content -->
+        <VerticalStackLayout Spacing="10" WidthRequest="250" Margin="0,70,0,0" HorizontalOptions="Center" >
+            <Frame Padding="0" HeightRequest="45" HasShadow="True" BackgroundColor="Transparent" BorderColor="White" CornerRadius="15" HorizontalOptions="FillAndExpand">
+                <handlers:BorderlessEntry x:Name="EmailEntry" Placeholder="EMAIL" PlaceholderColor="White" Margin="20,0,0,0" VerticalOptions="Center" />
+            </Frame>
+
+            <Frame Padding="0" HeightRequest="45" HasShadow="True" BackgroundColor="Transparent" BorderColor="White" CornerRadius="15" HorizontalOptions="FillAndExpand">
+                <handlers:BorderlessEntry x:Name="PhoneNumber" Placeholder="PHONE NUMBER" PlaceholderColor="White" Margin="20,0,0,0" VerticalOptions="Center" Keyboard="Numeric"/>
+            </Frame>
+
+            <Frame Padding="0" HeightRequest="45" HasShadow="True" BackgroundColor="Transparent" BorderColor="White" CornerRadius="15" HorizontalOptions="FillAndExpand">
+                <handlers:BorderlessEntry x:Name="UsernameEntry" Placeholder="USERNAME" PlaceholderColor="White" Margin="20,0,0,0" VerticalOptions="Center" />
+            </Frame>
+
+            <Frame Padding="0" HeightRequest="45" HasShadow="True" BackgroundColor="Transparent" BorderColor="White" CornerRadius="15" HorizontalOptions="FillAndExpand">
+                <handlers:BorderlessEntry x:Name="PasswordEntry" Placeholder="PASSWORD" PlaceholderColor="White" IsPassword="True" Margin="20,0,0,0" VerticalOptions="Center"/>
+            </Frame>
+
+            <Frame Padding="0" HeightRequest="45" HasShadow="True" BackgroundColor="Transparent" BorderColor="White" CornerRadius="15" HorizontalOptions="FillAndExpand">
+                <handlers:BorderlessEntry x:Name="ConfirmPasswordEntry" Placeholder="CONFIRM PASSWORD" PlaceholderColor="White" IsPassword="True" Margin="20,0,0,0" VerticalOptions="Center" />
+            </Frame>
+
+            <StackLayout Margin="0,30,0,0">
+                <Button Text="SEND OTP" x:Name="SendOTPButton" WidthRequest="250" FontAttributes="Bold" Clicked="SendOTPButton_Clicked" CornerRadius="20" TextColor="{x:StaticResource CustomColor}" HorizontalOptions="Center" BackgroundColor="White"  BorderWidth="1"/>
+            </StackLayout>
+        </VerticalStackLayout>
+    </Grid>
+</ContentPage>

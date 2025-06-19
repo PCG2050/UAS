@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             Shell.NavBarIsVisible="False"
+             xmlns:converter="clr-namespace:UAS.Converters"
+             xmlns:handlers="clr-namespace:UAS.Handlers"
+             xmlns:constants="clr-namespace:UAS.Constants"
+             xmlns:viewmodels ="clr-namespace:UAS.ViewModels"
+             x:Class="UAS.LoginPage">
+
+    <ContentPage.BindingContext>
+        <viewmodels:LoginViewModel />
+    </ContentPage.BindingContext>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converter:NullToBoolConverter x:Key="NullToBoolConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+        <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" IsVisible="{Binding LoginView}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.5*"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Image Grid.RowSpan="9" Source="{x:Static constants:Constants.MainBackgroundImage}" Aspect="AspectFill" />
+
+            <Grid Grid.Row="0" HorizontalOptions="FillAndExpand" VerticalOptions="Fill">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.2*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="0.2*"/>
+                </Grid.ColumnDefinitions>
+                <Frame Grid.ColumnSpan="3" HeightRequest="70" HorizontalOptions="FillAndExpand" BackgroundColor="White" CornerRadius="20" Padding="0,20,0,0">
+                    <StackLayout Margin="0,-15,0,0">
+                        <Image HeightRequest="60" HorizontalOptions="Center" Aspect="AspectFill" Source="{x:Static constants:Constants.LogoImage}" />
+                    </StackLayout>
+                </Frame>
+            </Grid>
+
+            <Label Text="Welcome!" FontAttributes="Bold" FontSize="Large" Grid.Row="1" Grid.ColumnSpan="3" VerticalTextAlignment="Center" VerticalOptions="Center"  HorizontalOptions="Center" TextColor="White" />
+
+            <StackLayout Grid.Row="2" Grid.Column="1" Spacing="10" HorizontalOptions="FillAndExpand">
+                <Frame BorderColor="White" HorizontalOptions="FillAndExpand" VerticalOptions="Start" Margin="0,20,0,0" HasShadow="False" Padding="8" BackgroundColor="Transparent" CornerRadius="40" WidthRequest="300">
+                   
+                    <!--Username-->
+                    <StackLayout Margin="20,0,0,0" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Orientation="Horizontal">
+                        <Image Aspect="AspectFit" HorizontalOptions="Start" Source="{x:Static constants:Constants.UserNameImage}" />
+                        <handlers:BorderlessEntry x:Name="UserName" Placeholder="USERNAME" Text="{Binding UserName}" PlaceholderColor="White" Margin="10,0,0,0" TextColor="White" BackgroundColor="Transparent" HorizontalOptions="FillAndExpand"  />
+                    </StackLayout>
+                </Frame>
+
+                <Frame BorderColor="White" HasShadow="False" Margin="0,20,0,0" Padding="8" BackgroundColor="Transparent" WidthRequest="300">
+                    <Frame.CornerRadius>
+                        <OnPlatform x:TypeArguments="x:Single">
+                            <On Platform="Android">40</On>
+                            <On Platform="iOS">20</On>
+                            <On Platform="UWP">40</On>
+                        </OnPlatform>
+                    </Frame.CornerRadius>
+                    <!--Password-->
+                    <StackLayout Margin="20,0,0,0" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Orientation="Horizontal">
+                        <Image Aspect="AspectFit" HorizontalOptions="Start" Source="{x:Static constants:Constants.PasswordImage}" />
+                        <handlers:BorderlessEntry x:Name="Password" IsPassword="True" Placeholder="PASSWORD" Text="{Binding Password}" PlaceholderColor="White" Margin="10,0,0,0" TextColor="White" BackgroundColor="Transparent" HorizontalOptions="FillAndExpand"  />
+                    </StackLayout>
+                </Frame>
+            </StackLayout>
+
+            <!-- Department Picker -->
+            <Frame Grid.Row="3" BorderColor="White" HasShadow="False" Margin="0,20,0,0" Padding="0" BackgroundColor="White" WidthRequest="300" Opacity="0.8" CornerRadius="40">
+                <StackLayout Margin="20,0,0,0" VerticalOptions="Center" HorizontalOptions="StartAndExpand" Orientation="Horizontal">
+                    <handlers:BorderlessPicker Title="SELECT UNIT OF DIRECTORATE OF EXTENSION" HorizontalTextAlignment="Center" ItemsSource="{Binding Departments}" SelectedItem="{Binding SelectedDepartment}" BackgroundColor="Transparent" />
+                </StackLayout>
+            </Frame>
+
+            <!-- Sub-Department Picker -->
+            <Frame Grid.Row="4" BorderColor="White" HasShadow="False" Margin="0,20,0,0" Padding="0" BackgroundColor="White" WidthRequest="300" Opacity="0.8" CornerRadius="40" IsVisible="{Binding IsSubDepartmentVisible}">
+                <StackLayout Margin="20,0,0,0" VerticalOptions="Center" HorizontalOptions="StartAndExpand" Orientation="Horizontal">
+                    <handlers:BorderlessPicker Title="SELECT REGIONAL UNIT OF DIRECTORATE" HorizontalTextAlignment="Center"  ItemsSource="{Binding SubDepartments}" BackgroundColor="Transparent" />
+                </StackLayout>
+            </Frame>
+
+            <!-- Terms and Conditions -->
+            <StackLayout Margin="0,50,0,0" Grid.Row="5" Grid.ColumnSpan="3" Orientation="Horizontal" Padding="0" HorizontalOptions="Center">
+                <CheckBox IsChecked="False" HorizontalOptions="Start" Color="White"/>
+                <Label VerticalOptions="Center" TextColor="White">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="I agree to the " TextColor="White"/>
+                            <Span Text="Terms and Conditions" TextColor="LightBlue" TextDecorations="Underline">
+                                <Span.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="OnTermsAndConditionsTapped"/>
+                                </Span.GestureRecognizers>
+                            </Span>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+            </StackLayout>
+
+            <!-- Login Button -->
+            <Button Margin="0,10,0,0" Text="LOGIN" FontAttributes="Bold" Grid.Row="6" WidthRequest="250" Grid.ColumnSpan="3" BackgroundColor="White" HorizontalOptions="CenterAndExpand" CornerRadius="27" TextColor="#196C9D" Command="{Binding LoginCommand}"  />
+
+            <!-- Forgot Password -->
+            <Label Text="Forgot Password?" Margin="10,10,10,10" Grid.Row="7" Grid.ColumnSpan="3" TextColor="White" HorizontalOptions="Center" TextDecorations="Underline">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" />
+                </Label.GestureRecognizers>
+            </Label>
+            <!--Signup-->
+            <HorizontalStackLayout Grid.Row="8" Grid.ColumnSpan="3" HorizontalOptions="Center" Margin="0,40,0,0" >
+                <Label Text="If New User? " TextColor="White"/>
+                <Label Text="SignUp"  TextColor="White" TextDecorations="Underline">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped_1"/>
+                </Label.GestureRecognizers>
+            </Label>
+            </HorizontalStackLayout>
+        </Grid>
+    </StackLayout>
+</ContentPage>

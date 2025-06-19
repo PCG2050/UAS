@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="UAS.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:UAS"
+    xmlns:models ="clr-namespace:UAS.Models"
+    xmlns:views ="clr-namespace:UAS.Views"
+    Shell.TabBarIsVisible="False"
+    Title="UAS">
+
+    <ShellContent
+        Title="LoginPage" FlyoutItemIsVisible="False" Shell.FlyoutBehavior="Disabled"
+        ContentTemplate="{DataTemplate local:LoginPage}"
+        Route="LoginPage" />
+
+    
+    <FlyoutItem Route="" FlyoutDisplayOptions="AsMultipleItems">
+        <ShellContent Title="" Icon="{x:Static models:Icons.Dashboard}" 
+                      ContentTemplate="{DataTemplate views:HomePage}" Route="Home"/>
+        <ShellContent
+            Title="Articles" Icon="{x:Static models:Icons.Test}"
+            ContentTemplate="{DataTemplate views:ArticlesPage}" Route="Articles"/>
+        <ShellContent
+    Title="Books" Icon="{x:Static models:Icons.Books}"
+    ContentTemplate="{DataTemplate views:BooksPage}" Route="Books"/>
+        <ShellContent
+    Title="AboutUs" Icon="{x:Static models:Icons.AboutUs}"
+    ContentTemplate="{DataTemplate views:AboutUsPage}" Route="AboutUs"/>
+        <ShellContent
+    Title="ContactUs" Icon="{x:Static models:Icons.ContactUs}"
+    ContentTemplate="{DataTemplate views:ContactUsPage}" Route="ContactUs"/>
+    </FlyoutItem>
+
+    <Shell.FlyoutHeader>
+        <StackLayout>
+            <HorizontalStackLayout HorizontalOptions="Center">
+                <Frame WidthRequest="200" HeightRequest="200" CornerRadius="100" BackgroundColor="LightGray" HorizontalOptions="Center">
+                    <Image x:Name="myImage" Source="logo.jpg" Aspect="AspectFit" HeightRequest="200" />
+                </Frame>
+                <ImageButton Source="edit.png" HorizontalOptions="End" VerticalOptions="End" HeightRequest="20" WidthRequest="20" Clicked="ImageButton_Clicked"/>
+            </HorizontalStackLayout>
+            <StackLayout Orientation="Vertical">
+                <Label x:Name="lblUserName" Text="User Name" FontSize="24" FontAttributes="Bold" />
+                <Label x:Name="lblUserRole" Text="Role" VerticalTextAlignment="Center" FontAttributes="Bold" FontSize="14" />
+            </StackLayout>
+        </StackLayout>
+    </Shell.FlyoutHeader>
+
+    <Shell.ToolbarItems>
+        <ToolbarItem IconImageSource="notificationicon.png" />
+    </Shell.ToolbarItems>
+
+    <Shell.FlyoutFooter>
+        <StackLayout Padding="20">
+            <Button Text="SIGN OUT" Command="{Binding SignOutCommand}" BackgroundColor="{StaticResource CustomColor}" />
+        </StackLayout>
+    </Shell.FlyoutFooter>
+</Shell>

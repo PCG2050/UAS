@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="UAS.Views.KVK.Page27"
+             Title="Krishi Vigyan Kendra(KVK)">
+    <ScrollView>
+        <StackLayout>
+            <Label Text="27. Soil, plant, compost &amp; water samples tested and soil health cards distributed :" FontSize="Medium" FontAttributes="Bold" Margin="5,0,0,0"/>
+            <Border BackgroundColor="White" Stroke="Black" StrokeThickness="2" Margin="7">
+                <StackLayout Padding="10">
+                    <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto"
+                          ColumnDefinitions="Auto,*" ColumnSpacing="10" RowSpacing="10">
+                        <Label Grid.Row="0" Text="Particulars" VerticalOptions="Center"/>
+                        <Picker Grid.Row="0" Grid.Column="1" Title="Select Type">
+                            <Picker.Items>
+                                <x:String>Soil</x:String>
+                                <x:String>Plant</x:String>
+                                <x:String>Water</x:String>
+                                <x:String>Compost</x:String>
+                            </Picker.Items>
+                        </Picker>
+
+                        <Label Grid.Row="1" Text="No. of Villages" VerticalOptions="Center"/>
+                        <Entry Grid.Row="1" Grid.Column="1" Placeholder="Enter Number"/>
+
+                        <Label Grid.Row="2" Text="No. of samples collected" VerticalOptions="Center"/>
+                        <Entry Grid.Row="2" Grid.Column="1" Placeholder="Enter Number" />
+
+                        <Label Grid.Row="3" Text="No. of samples analyzed" VerticalOptions="Center"/>
+                        <Entry Grid.Row="3" Grid.Column="1" Placeholder="Enter Number" />
+
+                        <Label Grid.Row="4" Text="No. of Soil Health Cards issued" VerticalOptions="Center"/>
+                        <Entry Grid.Row="4" Grid.Column="1" Placeholder="Enter Number" />
+
+                        <Label Grid.Row="5" Text="No. of Farmers" VerticalOptions="Center"/>
+                        <Grid Grid.Row="5" Grid.Column="1" ColumnDefinitions="*,*" RowDefinitions="Auto,Auto" VerticalOptions="Center" Margin="-50,0,0,0">
+                            <Label Grid.Row="0" Text="SC/ST" VerticalOptions="Center"/>
+                            <Entry Grid.Row="0" Grid.Column="1" Placeholder="Enter Number"/>
+
+                            <Label Grid.Row="1" Text="Gen" VerticalOptions="Center"/>
+                            <Entry Grid.Row="1" Grid.Column="1" Placeholder="Enter Number"/>
+                        </Grid>
+
+                        <Label Grid.Row="6" Text="Amount Realized (Rs.)" VerticalOptions="Center"/>
+                        <Entry Grid.Row="6" Grid.Column="1" Placeholder="Enter Amount"/>
+                    </Grid>
+                </StackLayout>
+            </Border>
+            <Grid>
+                <Button Text="&lt; Previous" HorizontalOptions="Start"  Margin="10,0,0,0"/>
+                <Button Text="Submit" HorizontalOptions="Center" WidthRequest="80" />
+                <Button Text="Next >" HorizontalOptions="End" WidthRequest="80" Margin="0,0,10,0"/>
+            </Grid>
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

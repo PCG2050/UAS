@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="UAS.Views.KVK.Page2"
+             Title="Krishi Vigyan Kendra(KVK)">
+    <ScrollView>
+        <StackLayout>
+            <Label Text="2. FLD :" FontSize="Medium" FontAttributes="Bold" Margin="5,0,0,0"/>
+            <Border BackgroundColor="White" Stroke="Black" StrokeThickness="2" Margin="7">
+                <StackLayout Padding="10">
+
+
+                    <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto"
+                    ColumnDefinitions="Auto,*" ColumnSpacing="10" RowSpacing="10">
+                        <Label Grid.Row="0" Text="Title" VerticalOptions="Center"/>
+                        <Entry Grid.Row="0" Grid.Column="1" Placeholder="Enter Title" />
+
+                        <Label Grid.Row="2" Text="Village/Taluk" VerticalOptions="Center"/>
+                        <Entry Grid.Row="2" Grid.Column="1" Placeholder="Enter Place"/>
+
+                        <Label Grid.Row="1" Text="Area(ha)" VerticalOptions="Center"/>
+                        <Entry Grid.Row="1" Grid.Column="1" Placeholder="Enter Area" />
+
+
+
+                        <Frame Grid.Row="3" Grid.ColumnSpan="2" BorderColor="Gray" CornerRadius="10" Padding="10" Margin="0,0,0,10">
+                            <StackLayout>
+                                <Label Text="No. of Trials" FontAttributes="Bold" VerticalOptions="Center"/>
+                                <Grid ColumnDefinitions="*,*" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto" VerticalOptions="Center">
+                                    <Label Grid.Row="0" Grid.ColumnSpan="2" Text="Male" FontAttributes="Bold" />
+                                    <Label Grid.Row="1" Text="SC/ST" VerticalOptions="Center"/>
+                                    <Entry Grid.Row="1" Grid.Column="1" Placeholder="Enter Number" />
+                                    <Label Grid.Row="2" Text="Gen" VerticalOptions="Center"/>
+                                    <Entry Grid.Row="2" Grid.Column="1" Placeholder="Enter Number" />
+
+                                    <Label Grid.Row="3" Grid.ColumnSpan="2" Text="Female" FontAttributes="Bold"/>
+                                    <Label Grid.Row="4" Text="SC/ST" VerticalOptions="Center"/>
+                                    <Entry Grid.Row="4" Grid.Column="1" Placeholder="Enter Number" />
+                                    <Label Grid.Row="5" Text="Gen" VerticalOptions="Center"/>
+                                    <Entry Grid.Row="5" Grid.Column="1" Placeholder="Enter Number" />
+                                </Grid>
+                            </StackLayout>
+                        </Frame>
+
+                        <Label Grid.Row="4" Text="Yield (q/ha)" VerticalOptions="Center"/>
+                        <Grid Grid.Row="4" Grid.Column="1" ColumnDefinitions="*,*" RowDefinitions="Auto,Auto,Auto,Auto" VerticalOptions="Center"  Margin="-40,0,0,0">
+                            <Label Grid.Row="0" Grid.ColumnSpan="2" Text="Yield (q/ha)" FontAttributes="Bold"/>
+                            <Label Grid.Row="1" Text="Demo" VerticalOptions="Center"/>
+                            <Entry Grid.Row="1" Grid.Column="1" Placeholder="Enter Yield"/>
+
+                            <Label Grid.Row="2" Text="Check" VerticalOptions="Center"/>
+                            <Entry Grid.Row="2" Grid.Column="1" Placeholder="Enter Yield"/>
+                        </Grid>
+                        <Label Grid.Row="5" Text="% increase in yield over T2" VerticalOptions="Center" LineBreakMode="WordWrap"/>
+                        <Entry Grid.Row="5" Grid.Column="1" Placeholder="Enter Percentage"/>
+
+                    </Grid>
+                </StackLayout>
+            </Border>
+            <Grid>
+                <Button Text="&lt; Previous" HorizontalOptions="Start"  Margin="10,0,0,0"/>
+                <Button Text="Submit" HorizontalOptions="Center" WidthRequest="80" />
+                <Button Text="Next >" HorizontalOptions="End" WidthRequest="80" Margin="0,0,10,0"/>
+            </Grid>
+        </StackLayout>
+    </ScrollView>
+
+</ContentPage>

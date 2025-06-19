@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="UAS.Views.KVK.Page14"
+             Title="Krishi Vigyan Kendra(KVK)">
+    <ScrollView>
+        <StackLayout>
+            <Label Text="14. Exhibitions &amp; Krishimelas organised / participated :" FontSize="Medium" FontAttributes="Bold" Margin="5,0,0,0"/>
+            <Border BackgroundColor="White" Stroke="Black" StrokeThickness="2" Margin="7">
+                <StackLayout Padding="10">
+
+
+                    <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto"
+ColumnDefinitions="Auto,*" ColumnSpacing="10" RowSpacing="10">
+
+                        <Label Grid.Row="0" Text="Exhibition / Krishimela" VerticalOptions="Center"/>
+                        <Entry Grid.Row="0" Grid.Column="1" Placeholder="Enter Text"/>
+
+                        <Label Grid.Row="1" Text="Date" VerticalOptions="Center"/>
+                        <DatePicker Grid.Row="1" Grid.Column="1"  />
+
+                        <Label Grid.Row="2" Text="Organized / Participated" VerticalOptions="Center"/>
+                        <Entry Grid.Row="2" Grid.Column="1" Placeholder="Enter Text" />
+
+
+                        <Label Grid.Row="3" Text="Place / Taluk" VerticalOptions="Center"/>
+                        <Entry Grid.Row="3" Grid.Column="1" Placeholder="Enter Place" />
+
+                        <Label Grid.Row="4" Text="Organizers / collaboration" VerticalOptions="Center"/>
+                        <Entry Grid.Row="4" Grid.Column="1" Placeholder="Enter Text" />
+
+                        <Label Grid.Row="5" Text="Associate staff accompanied" VerticalOptions="Center"/>
+                        <Entry Grid.Row="5" Grid.Column="1" Placeholder="Enter Text" />
+
+                    </Grid>
+                </StackLayout>
+            </Border>
+            <Grid>
+                <Button Text="&lt; Previous" HorizontalOptions="Start"  Margin="10,0,0,0"/>
+                <Button Text="Submit" HorizontalOptions="Center" WidthRequest="80" />
+                <Button Text="Next >" HorizontalOptions="End" WidthRequest="80" Margin="0,0,10,0"/>
+            </Grid>
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

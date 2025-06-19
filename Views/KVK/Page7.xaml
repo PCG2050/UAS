@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="UAS.Views.KVK.Page7"
+             Title="Krishi VIdyan Kendra (KVK)">
+    <ScrollView>
+        <StackLayout >
+            <Label Text="7. Consultancy services / Farm Advisory Services provided"  
+                   FontSize="Medium" FontAttributes="Bold" Margin="5,10,0,10"/>
+            <Border BackgroundColor="White" Stroke="Black" StrokeThickness="2" Margin="7">
+                <StackLayout Padding="10">
+                    
+                    <!-- Headers -->
+                    <Grid ColumnDefinitions="*,Auto,Auto" RowDefinitions="Auto,Auto,Auto,Auto,Auto" ColumnSpacing="10" RowSpacing="10">
+                        <Label Grid.Column="0" Text="Particulars" FontAttributes="Bold" HorizontalOptions="Start"/>
+                        <Label Grid.Column="1" Text="Through Phone(Nos)" FontAttributes="Bold" HorizontalOptions="Center"/>
+                        <Label Grid.Column="2" Text="Face to Face at KVK(Nos)" FontAttributes="Bold" HorizontalOptions="Center"/>
+
+                        <!-- Farmers Row -->
+                        <Label Grid.Row="1" Grid.Column="0" Text="Farmers" VerticalOptions="Center"/>
+                        <Entry Grid.Row="1" Grid.Column="1" Placeholder="Enter Number" Keyboard="Numeric"/>
+                        <Entry Grid.Row="1" Grid.Column="2" Placeholder="Enter Number" Keyboard="Numeric"/>
+
+                        <!-- Extension Personal Row -->
+                        <Label Grid.Row="2" Grid.Column="0" Text="Extension Personal" VerticalOptions="Center"/>
+                        <Entry Grid.Row="2" Grid.Column="1" Placeholder="Enter Number" Keyboard="Numeric"/>
+                        <Entry Grid.Row="2" Grid.Column="2" Placeholder="Enter Number" Keyboard="Numeric"/>
+
+                        <!-- Rural Youth Row -->
+                        <Label Grid.Row="3" Grid.Column="0" Text="Rural Youth" VerticalOptions="Center"/>
+                        <Entry Grid.Row="3" Grid.Column="1" Placeholder="Enter Number" Keyboard="Numeric"/>
+                        <Entry Grid.Row="3" Grid.Column="2" Placeholder="Enter Number" Keyboard="Numeric"/>
+
+                        <!-- Women Row -->
+                        <Label Grid.Row="4" Grid.Column="0" Text="Women" VerticalOptions="Center"/>
+                        <Entry Grid.Row="4" Grid.Column="1" Placeholder="Enter Number" Keyboard="Numeric"/>
+                        <Entry Grid.Row="4" Grid.Column="2" Placeholder="Enter Number" Keyboard="Numeric"/>
+                    </Grid>
+                </StackLayout>
+            </Border>
+            <Grid>
+                <Button Text="&lt; Previous" HorizontalOptions="Start"  Margin="10,0,0,0"/>
+                <Button Text="Submit" HorizontalOptions="Center" WidthRequest="80" />
+                <Button Text="Next >" HorizontalOptions="End" WidthRequest="80" Margin="0,0,10,0"/>
+            </Grid>
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

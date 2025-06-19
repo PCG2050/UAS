@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="UAS.Views.KVK.Page42"             
+             Title="Krishi Vigyan Kendra(KVK)">
+    
+        <ScrollView>
+            <StackLayout Padding="10">
+                <Label Text="42. Any Other Activities not listed before" 
+                    FontSize="Medium"
+                    FontAttributes="Bold"
+                    Margin="5,10,0,10"/>
+
+                <Border BackgroundColor="White" 
+                     Stroke="Black" 
+                     StrokeThickness="2" 
+                     Margin="7">
+                    <StackLayout Padding="10">
+                        <Editor Placeholder="Please enter any other activities here" 
+                             HeightRequest="300" 
+                             Margin="0,10,0,10"/>
+                    </StackLayout>
+                </Border>
+                <Grid>
+                    <Button Text="&lt; Previous" HorizontalOptions="Start"  Margin="10,0,0,0"/>
+                    <Button Text="Submit" HorizontalOptions="Center" WidthRequest="80" Clicked="Button_Clicked" />
+                   
+                </Grid>
+            </StackLayout>
+        </ScrollView>
+    
+
+
+</ContentPage>

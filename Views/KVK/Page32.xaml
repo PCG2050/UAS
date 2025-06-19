@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="UAS.Views.KVK.Page32"            
+             xmlns:handlers ="clr-namespace:UAS.Handlers"
+             Title="Krishi Vigyan Kendra(KVK)">
+
+  
+
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout>
+                <Label Text="32. EVK Activities" FontSize="Medium" FontAttributes="Bold" Margin="5,10,0,10"/>
+                <Frame BorderColor="Gray" HasShadow="True" CornerRadius="20" Margin="5,10,0,10" HeightRequest="50" >
+                    <handlers:BorderlessPicker Title="Select Section" ItemsSource="{Binding Sections}" SelectedItem="{Binding SelectedSection}" HeightRequest="50" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand"/>
+                </Frame>
+                <Border BackgroundColor="White" IsVisible="{Binding IsBorderVisible}" Stroke="Black" StrokeThickness="2" Margin="7">
+                    <StackLayout Padding="10">                     
+
+                       
+                        <!-- Diploma Course section -->
+                        <StackLayout IsVisible="{Binding IsDiplomaSelected}">
+                            <Label Text="32.1 Short messeges to be sent to farmers for the coming month (Each Scientist to give min 3 messages) :" FontSize="Medium" FontAttributes="Bold"  Margin="0,10,0,0"/>
+                            <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto"
+                                  ColumnDefinitions="Auto,*" ColumnSpacing="10" RowSpacing="10">
+                                <Label Grid.Row="0" Text="SL.No." VerticalOptions="Center"/>
+                                <Entry Grid.Row="0" Grid.Column="1" Placeholder="Enter SL.No." />
+
+                                <Label Grid.Row="1" Text="No. of Candidates admitted" VerticalOptions="Center"/>
+                                <Entry Grid.Row="1" Grid.Column="1" Placeholder="Enter Number"/>
+
+                                <Label Grid.Row="2" Text="No of Candidate Attended Exam" VerticalOptions="Center"/>
+                                <Entry Grid.Row="2" Grid.Column="1" Placeholder="Enter number" />
+
+                              
+                            </Grid>
+                        </StackLayout>
+
+                        <!-- Certificate Course section -->
+                        <StackLayout IsVisible="{Binding IsCertificateSelected}">
+                            <Label Text="32.2. Expert center (Video conferencing) :" FontSize="Medium" FontAttributes="Bold" Margin="0,10,0,0"/>
+                            <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto"
+                                  ColumnDefinitions="Auto,*" ColumnSpacing="10" RowSpacing="10">
+                                <Label Grid.Row="0" Text="Date" VerticalOptions="Center"/>
+                                <DatePicker Grid.Row="0" Grid.Column="1"  />
+
+                                <Label Grid.Row="1" Text="{Binding ParticipatingCenterLabel}" VerticalOptions="Center"/>
+                                <Entry Grid.Row="1" Grid.Column="1" Placeholder="Enter center"/>
+
+                                <Label Grid.Row="2" Text="Purpose" VerticalOptions="Center"/>
+                                <Entry Grid.Row="2" Grid.Column="1" Placeholder="Enter Purpose" />
+
+                                <Label Grid.Row="3" Text="Participants(Nos)" VerticalOptions="Center"/>
+                                <Grid Grid.Row="3" Grid.Column="1" ColumnDefinitions="*,*" RowDefinitions="Auto,Auto,Auto,Auto" VerticalOptions="Center"  Margin="0,0,0,0">
+                                    <Label Grid.Row="0" Grid.ColumnSpan="2" Text="Yield (q/ha)" FontAttributes="Bold"/>
+                                    <Label Grid.Row="1" Text="Farmers" VerticalOptions="Center"/>
+                                    <Entry Grid.Row="1" Grid.Column="1" Placeholder="Enter Number"/>
+
+                                    <Label Grid.Row="2" Text="Officials" VerticalOptions="Center"/>
+                                    <Entry Grid.Row="2" Grid.Column="1" Placeholder="Enter Number"/>
+
+                                    <Label Grid.Row="3" Text="Total" VerticalOptions="Center"/>
+                                    <Entry Grid.Row="3" Grid.Column="1" Placeholder=""/>
+                                </Grid>
+                            </Grid>
+                        </StackLayout>
+
+                        <!-- Additional Activities section -->
+                        <StackLayout IsVisible="{Binding IsOtherActivitiesSelected}">
+                            <Label Text="32.3 Other e-KVK activities : Mention the activities like KVK portal/e-courses/web browsing training/etc.," FontSize="Medium" FontAttributes="Bold" Margin="0,10,0,0"/>
+                            <Frame BorderColor="Gray" HasShadow="True" Padding="10" Margin="0,10,0,0">
+                                <Editor Placeholder="Details" HeightRequest="100" />
+                            </Frame>
+                        </StackLayout>
+
+                       
+                    </StackLayout>
+                </Border>
+                <Grid IsVisible="{Binding IsBorderVisible}">
+                    <Button Text="&lt; Previous" HorizontalOptions="Start"  Margin="10,0,0,0"/>
+                    <Button Text="Submit" HorizontalOptions="Center" WidthRequest="80" />
+                    <Button Text="Next >" HorizontalOptions="End" WidthRequest="80" Margin="0,0,10,0"/>
+                </Grid>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>
