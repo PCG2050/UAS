@@ -1,5 +1,5 @@
 ﻿using System;
-using UAS.ViewModels;
+using UAS.ViewModel;
 
 
 namespace UAS.Views
@@ -11,8 +11,7 @@ namespace UAS.Views
             InitializeComponent();
             BindingContext = new HomePageViewModel();
         }
-
-       
-       
+            
+       private async void 
     }
 }

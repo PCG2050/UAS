@@ -1,6 +1,6 @@
 ﻿using CommunityToolkit.Maui;
 using Microsoft.Extensions.Logging;
-using UAS.ViewModels;
+using UAS.ViewModel;
 
 namespace UAS
 {

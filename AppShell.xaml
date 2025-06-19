@@ -4,45 +4,82 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:UAS"
-    xmlns:models ="clr-namespace:UAS.Models"
-    xmlns:views ="clr-namespace:UAS.Views"
-    Shell.TabBarIsVisible="False"
-    Title="UAS">
+    xmlns:models="clr-namespace:UAS.Models"
+    xmlns:views="clr-namespace:UAS.Views"
+    Title="UAS"
+    Shell.TabBarIsVisible="False">
 
     <ShellContent
-        Title="LoginPage" FlyoutItemIsVisible="False" Shell.FlyoutBehavior="Disabled"
+        Title="LoginPage"
         ContentTemplate="{DataTemplate local:LoginPage}"
-        Route="LoginPage" />
+        FlyoutItemIsVisible="False"
+        Route="LoginPage"
+        Shell.FlyoutBehavior="Disabled" />
 
-    
-    <FlyoutItem Route="" FlyoutDisplayOptions="AsMultipleItems">
-        <ShellContent Title="" Icon="{x:Static models:Icons.Dashboard}" 
-                      ContentTemplate="{DataTemplate views:HomePage}" Route="Home"/>
+
+    <FlyoutItem FlyoutDisplayOptions="AsMultipleItems" Route="">
         <ShellContent
-            Title="Articles" Icon="{x:Static models:Icons.Test}"
-            ContentTemplate="{DataTemplate views:ArticlesPage}" Route="Articles"/>
+            Title="Home"
+            ContentTemplate="{DataTemplate views:HomePage}"
+            Icon="{x:Static models:Icons.Dashboard}"
+            Route="Home" />
         <ShellContent
-    Title="Books" Icon="{x:Static models:Icons.Books}"
-    ContentTemplate="{DataTemplate views:BooksPage}" Route="Books"/>
+            Title="Articles"
+            ContentTemplate="{DataTemplate views:ArticlesPage}"
+            Icon="{x:Static models:Icons.Test}"
+            Route="Articles" />
         <ShellContent
-    Title="AboutUs" Icon="{x:Static models:Icons.AboutUs}"
-    ContentTemplate="{DataTemplate views:AboutUsPage}" Route="AboutUs"/>
+            Title="Books"
+            ContentTemplate="{DataTemplate views:BooksPage}"
+            Icon="{x:Static models:Icons.Books}"
+            Route="Books" />
         <ShellContent
-    Title="ContactUs" Icon="{x:Static models:Icons.ContactUs}"
-    ContentTemplate="{DataTemplate views:ContactUsPage}" Route="ContactUs"/>
+            Title="AboutUs"
+            ContentTemplate="{DataTemplate views:AboutUsPage}"
+            Icon="{x:Static models:Icons.AboutUs}"
+            Route="AboutUs" />
+        <ShellContent
+            Title="ContactUs"
+            ContentTemplate="{DataTemplate views:ContactUsPage}"
+            Icon="{x:Static models:Icons.ContactUs}"
+            Route="ContactUs" />
     </FlyoutItem>
 
     <Shell.FlyoutHeader>
         <StackLayout>
             <HorizontalStackLayout HorizontalOptions="Center">
-                <Frame WidthRequest="200" HeightRequest="200" CornerRadius="100" BackgroundColor="LightGray" HorizontalOptions="Center">
-                    <Image x:Name="myImage" Source="logo.jpg" Aspect="AspectFit" HeightRequest="200" />
+                <Frame
+                    BackgroundColor="LightGray"
+                    CornerRadius="100"
+                    HeightRequest="200"
+                    HorizontalOptions="Center"
+                    WidthRequest="200">
+                    <Image
+                        x:Name="myImage"
+                        Aspect="AspectFit"
+                        HeightRequest="200"
+                        Source="logo.jpg" />
                 </Frame>
-                <ImageButton Source="edit.png" HorizontalOptions="End" VerticalOptions="End" HeightRequest="20" WidthRequest="20" Clicked="ImageButton_Clicked"/>
+                <ImageButton
+                    Clicked="ImageButton_Clicked"
+                    HeightRequest="20"
+                    HorizontalOptions="End"
+                    Source="edit.png"
+                    VerticalOptions="End"
+                    WidthRequest="20" />
             </HorizontalStackLayout>
             <StackLayout Orientation="Vertical">
-                <Label x:Name="lblUserName" Text="User Name" FontSize="24" FontAttributes="Bold" />
-                <Label x:Name="lblUserRole" Text="Role" VerticalTextAlignment="Center" FontAttributes="Bold" FontSize="14" />
+                <Label
+                    x:Name="lblUserName"
+                    FontAttributes="Bold"
+                    FontSize="24"
+                    Text="User Name" />
+                <Label
+                    x:Name="lblUserRole"
+                    FontAttributes="Bold"
+                    FontSize="14"
+                    Text="Role"
+                    VerticalTextAlignment="Center" />
             </StackLayout>
         </StackLayout>
     </Shell.FlyoutHeader>
@@ -53,7 +90,10 @@
 
     <Shell.FlyoutFooter>
         <StackLayout Padding="20">
-            <Button Text="SIGN OUT" Command="{Binding SignOutCommand}" BackgroundColor="{StaticResource CustomColor}" />
+            <Button
+                BackgroundColor="{StaticResource CustomColor}"
+                Command="{Binding SignOutCommand}"
+                Text="SIGN OUT" />
         </StackLayout>
     </Shell.FlyoutFooter>
 </Shell>

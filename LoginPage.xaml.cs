@@ -1,5 +1,5 @@
 using System.Collections.ObjectModel;
-using UAS.ViewModels;
+using UAS.ViewModel;
 
 namespace UAS
 {

@@ -1,180 +1,602 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
-               xmlns:handlers="clr-namespace:UAS.Handlers"
-             xmlns:vm="clr-namespace:UAS.ViewModels"
-             x:Class="UAS.Views.HomePage">
+<ContentPage
+    x:Class="UAS.Views.HomePage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:handlers="clr-namespace:UAS.Handlers"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    xmlns:vm="clr-namespace:UAS.ViewModel">
 
     <ContentPage.BindingContext>
         <vm:HomePageViewModel />
     </ContentPage.BindingContext>
 
     <ContentPage.Content>
-        <ScrollView>
-            <StackLayout>
+        <StackLayout>
 
-                <Label Text="Extension Education Unit (EEU)" FontSize="Large" FontAttributes="Bold" HorizontalOptions="Center" Margin="5,0,0,0"/>
-                <Frame BackgroundColor="White" BorderColor="Gray" HasShadow="True" CornerRadius="10" Margin="5,10,10,10" HeightRequest="50">
-                    <handlers:BorderlessPicker Title="Select Section" SelectedItem="{Binding SelectedSection}" HeightRequest="50" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand">
-                        <handlers:BorderlessPicker.ItemsSource>
-                            <x:Array Type="{x:Type x:String}">
-                                <x:String>OFT</x:String>
-                                <x:String>FLD</x:String>
-                                <x:String>Training Program</x:String>
-                                <x:String>Any Other Activities</x:String>
-                            </x:Array>
-                        </handlers:BorderlessPicker.ItemsSource>
-                    </handlers:BorderlessPicker>
+            <Label
+                Margin="0,50,0,0"
+                FontAttributes="Bold"
+                FontSize="Medium"
+                HorizontalOptions="Center"
+                Text="Welcome! User &#x0a;Select the Training Unit to enter the Data" />
+
+            <!--  Department Picker  -->
+            <Frame
+                Margin="0,50,0,0"
+                Padding="0"
+                BackgroundColor="White"
+                BorderColor="Black"
+                CornerRadius="10"
+                HasShadow="False"
+                Opacity="0.8"
+                WidthRequest="300">
+                <StackLayout
+                    Margin="20,0,0,0"
+                    HorizontalOptions="StartAndExpand"
+                    Orientation="Horizontal"
+                    VerticalOptions="Center">
+                    <handlers:BorderlessPicker
+                        Title="SELECT UNIT OF DIRECTORATE OF EXTENSION"
+                        BackgroundColor="Transparent"
+                        HorizontalTextAlignment="Center"
+                        ItemsSource="{Binding Departments}"
+                        SelectedItem="{Binding SelectedDepartment}" />
+                </StackLayout>
+            </Frame>
+
+            <!--  Sub-Department Picker  -->
+            <Frame
+                Margin="0,20,0,0"
+                Padding="0"
+                BackgroundColor="White"
+                BorderColor="Black"
+                CornerRadius="10"
+                HasShadow="False"
+                IsVisible="{Binding IsSubDepartmentVisible}"
+                Opacity="0.8"
+                WidthRequest="300">
+                <StackLayout
+                    Margin="20,0,0,0"
+                    HorizontalOptions="StartAndExpand"
+                    Orientation="Horizontal"
+                    VerticalOptions="Center">
+                    <handlers:BorderlessPicker
+                        Title="SELECT REGIONAL UNIT OF DIRECTORATE"
+                        BackgroundColor="Transparent"
+                        HorizontalTextAlignment="Center"
+                        ItemsSource="{Binding SubDepartments}" />
+                </StackLayout>
+            </Frame>
+
+            <!--  Modern Cards for New Training Entry and History  -->
+            <Grid
+                Margin="0,50,0,0"
+                ColumnSpacing="24"
+                HorizontalOptions="Center">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <!--  New Training Entry Card  -->
+                <Frame
+                    Grid.Column="0"
+                    Margin="0"
+                    Padding="0"
+                    BackgroundColor="Transparent"
+                    CornerRadius="18"
+                    HasShadow="True"
+                    HeightRequest="100"
+                    IsClippedToBounds="True"
+                    WidthRequest="160">
+                    <Grid>
+                        <Grid.Background>
+                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                <GradientStop Offset="0.0" Color="#2196F3" />
+                                <GradientStop Offset="1.0" Color="#6EC6FF" />
+                            </LinearGradientBrush>
+                        </Grid.Background>
+                        <StackLayout HorizontalOptions="Center" VerticalOptions="Center">
+                            <Image
+                                Margin="0,10,0,0"
+                                HeightRequest="40"
+                                Source="add_training_icon.png"
+                                WidthRequest="40" />
+                            <Label
+                                Margin="0,10,0,0"
+                                FontAttributes="Bold"
+                                FontSize="16"
+                                HorizontalOptions="Center"
+                                Text="New Training Entry"
+                                TextColor="White" />
+                        </StackLayout>
+                    </Grid>
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding NewTrainingEntryCommand}" />
+                    </Frame.GestureRecognizers>
                 </Frame>
-                <!-- Border that wraps the content and its visibility -->
-                <Border BackgroundColor="White" Stroke="Black" StrokeThickness="2" Margin="7" IsVisible="{Binding IsBorderVisible}">
-                    <StackLayout Padding="10">
 
-                        <!-- OFT Section -->
-                        <ContentView IsVisible="{Binding IsOFTSelected}" >
-                            <StackLayout>
-                                <Label Text="(a) OFT" FontSize="Medium" FontAttributes="Bold"  Margin="0,20,0,0"/>
+                <!--  History Card  -->
+                <Frame
+                    Grid.Column="1"
+                    Margin="0"
+                    Padding="0"
+                    BackgroundColor="Transparent"
+                    CornerRadius="18"
+                    HasShadow="True"
+                    HeightRequest="100"
+                    IsClippedToBounds="True"
+                    WidthRequest="160">
+                    <Grid>
+                        <Grid.Background>
+                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                <GradientStop Offset="0.0" Color="#43E97B" />
+                                <GradientStop Offset="1.0" Color="#38F9D7" />
+                            </LinearGradientBrush>
+                        </Grid.Background>
+                        <StackLayout HorizontalOptions="Center" VerticalOptions="Center">
+                            <Image
+                                Margin="0,10,0,0"
+                                HeightRequest="40"
+                                Source="history_icon.png"
+                                WidthRequest="40" />
+                            <Label
+                                Margin="0,10,0,0"
+                                FontAttributes="Bold"
+                                FontSize="16"
+                                HorizontalOptions="Center"
+                                Text="History"
+                                TextColor="Black" />
+                        </StackLayout>
+                    </Grid>
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding HistoryCommand}" />
+                    </Frame.GestureRecognizers>
+                </Frame>
+            </Grid>
 
-                                <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto"
-                                  ColumnDefinitions="Auto,*" ColumnSpacing="10" RowSpacing="10">
-                                    <Label Grid.Row="0" Text="Title" VerticalOptions="Center"/>
-                                    <Entry Grid.Row="0" Grid.Column="1" Placeholder="Enter Title" />
 
-                                    <Label Grid.Row="1" Text="Crop" VerticalOptions="Center"/>
-                                    <Entry Grid.Row="1" Grid.Column="1" Placeholder="Enter Crop"/>
 
-                                    <Label Grid.Row="2" Text="Area(ha)" VerticalOptions="Center"/>
-                                    <Entry Grid.Row="2" Grid.Column="1" Placeholder="Enter Area" />
+            <ScrollView>
+                <StackLayout>
 
-                                    <Frame Grid.Row="3" Grid.ColumnSpan="2" BorderColor="Gray" CornerRadius="10" Padding="10" Margin="0,0,0,10">
-                                        <StackLayout>
-                                            <Label Text="No. of Trials" FontAttributes="Bold" VerticalOptions="Center"/>
-                                            <Grid ColumnDefinitions="*,*" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto" VerticalOptions="Center">
-                                                <Label Grid.Row="0" Grid.ColumnSpan="2" Text="Male" FontAttributes="Bold" />
-                                                <Label Grid.Row="1" Text="SC/ST" VerticalOptions="Center"/>
-                                                <Entry Grid.Row="1" Grid.Column="1" Placeholder="Enter Number" />
-                                                <Label Grid.Row="2" Text="Gen" VerticalOptions="Center"/>
-                                                <Entry Grid.Row="2" Grid.Column="1" Placeholder="Enter Number" />
+                    <Label
+                        Margin="5,0,0,0"
+                        FontAttributes="Bold"
+                        FontSize="Large"
+                        HorizontalOptions="Center"
+                        Text="Extension Education Unit (EEU)" />
+                    <Frame
+                        Margin="5,10,10,10"
+                        BackgroundColor="White"
+                        BorderColor="Gray"
+                        CornerRadius="10"
+                        HasShadow="True"
+                        HeightRequest="50">
+                        <handlers:BorderlessPicker
+                            Title="Select Section"
+                            HeightRequest="50"
+                            HorizontalOptions="FillAndExpand"
+                            SelectedItem="{Binding SelectedSection}"
+                            VerticalOptions="CenterAndExpand">
+                            <handlers:BorderlessPicker.ItemsSource>
+                                <x:Array Type="{x:Type x:String}">
+                                    <x:String>OFT</x:String>
+                                    <x:String>FLD</x:String>
+                                    <x:String>Training Program</x:String>
+                                    <x:String>Any Other Activities</x:String>
+                                </x:Array>
+                            </handlers:BorderlessPicker.ItemsSource>
+                        </handlers:BorderlessPicker>
+                    </Frame>
+                    <!--  Border that wraps the content and its visibility  -->
+                    <Border
+                        Margin="7"
+                        BackgroundColor="White"
+                        IsVisible="{Binding IsBorderVisible}"
+                        Stroke="Black"
+                        StrokeThickness="2">
+                        <StackLayout Padding="10">
 
-                                                <Label Grid.Row="3" Grid.ColumnSpan="2" Text="Female" FontAttributes="Bold"/>
-                                                <Label Grid.Row="4" Text="SC/ST" VerticalOptions="Center"/>
-                                                <Entry Grid.Row="4" Grid.Column="1" Placeholder="Enter Number" />
-                                                <Label Grid.Row="5" Text="Gen" VerticalOptions="Center"/>
-                                                <Entry Grid.Row="5" Grid.Column="1" Placeholder="Enter Number" />
-                                            </Grid>
-                                        </StackLayout>
-                                    </Frame>
+                            <!--  OFT Section  -->
+                            <ContentView IsVisible="{Binding IsOFTSelected}">
+                                <StackLayout>
+                                    <Label
+                                        Margin="0,20,0,0"
+                                        FontAttributes="Bold"
+                                        FontSize="Medium"
+                                        Text="(a) OFT" />
 
-                                    <Label Grid.Row="4" Text="Yield (q/ha)" VerticalOptions="Center"/>
-                                    <Grid Grid.Row="4" Grid.Column="1" ColumnDefinitions="*,*" RowDefinitions="Auto,Auto,Auto,Auto" VerticalOptions="Center"  Margin="-40,0,0,0">
-                                        <Label Grid.Row="0" Grid.ColumnSpan="2" Text="Yield (q/ha)" FontAttributes="Bold"/>
-                                        <Label Grid.Row="1" Text="T1" VerticalOptions="Center"/>
-                                        <Entry Grid.Row="1" Grid.Column="1" Placeholder="Enter T1"/>
+                                    <Grid
+                                        ColumnDefinitions="Auto,*"
+                                        ColumnSpacing="10"
+                                        RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto"
+                                        RowSpacing="10">
+                                        <Label
+                                            Grid.Row="0"
+                                            Text="Title"
+                                            VerticalOptions="Center" />
+                                        <Entry
+                                            Grid.Row="0"
+                                            Grid.Column="1"
+                                            Placeholder="Enter Title" />
 
-                                        <Label Grid.Row="2" Text="T2" VerticalOptions="Center"/>
-                                        <Entry Grid.Row="2" Grid.Column="1" Placeholder="Enter T2"/>
+                                        <Label
+                                            Grid.Row="1"
+                                            Text="Crop"
+                                            VerticalOptions="Center" />
+                                        <Entry
+                                            Grid.Row="1"
+                                            Grid.Column="1"
+                                            Placeholder="Enter Crop" />
+
+                                        <Label
+                                            Grid.Row="2"
+                                            Text="Area(ha)"
+                                            VerticalOptions="Center" />
+                                        <Entry
+                                            Grid.Row="2"
+                                            Grid.Column="1"
+                                            Placeholder="Enter Area" />
+
+                                        <Frame
+                                            Grid.Row="3"
+                                            Grid.ColumnSpan="2"
+                                            Margin="0,0,0,10"
+                                            Padding="10"
+                                            BorderColor="Gray"
+                                            CornerRadius="10">
+                                            <StackLayout>
+                                                <Label
+                                                    FontAttributes="Bold"
+                                                    Text="No. of Trials"
+                                                    VerticalOptions="Center" />
+                                                <Grid
+                                                    ColumnDefinitions="*,*"
+                                                    RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto"
+                                                    VerticalOptions="Center">
+                                                    <Label
+                                                        Grid.Row="0"
+                                                        Grid.ColumnSpan="2"
+                                                        FontAttributes="Bold"
+                                                        Text="Male" />
+                                                    <Label
+                                                        Grid.Row="1"
+                                                        Text="SC/ST"
+                                                        VerticalOptions="Center" />
+                                                    <Entry
+                                                        Grid.Row="1"
+                                                        Grid.Column="1"
+                                                        Placeholder="Enter Number" />
+                                                    <Label
+                                                        Grid.Row="2"
+                                                        Text="Gen"
+                                                        VerticalOptions="Center" />
+                                                    <Entry
+                                                        Grid.Row="2"
+                                                        Grid.Column="1"
+                                                        Placeholder="Enter Number" />
+
+                                                    <Label
+                                                        Grid.Row="3"
+                                                        Grid.ColumnSpan="2"
+                                                        FontAttributes="Bold"
+                                                        Text="Female" />
+                                                    <Label
+                                                        Grid.Row="4"
+                                                        Text="SC/ST"
+                                                        VerticalOptions="Center" />
+                                                    <Entry
+                                                        Grid.Row="4"
+                                                        Grid.Column="1"
+                                                        Placeholder="Enter Number" />
+                                                    <Label
+                                                        Grid.Row="5"
+                                                        Text="Gen"
+                                                        VerticalOptions="Center" />
+                                                    <Entry
+                                                        Grid.Row="5"
+                                                        Grid.Column="1"
+                                                        Placeholder="Enter Number" />
+                                                </Grid>
+                                            </StackLayout>
+                                        </Frame>
+
+                                        <Label
+                                            Grid.Row="4"
+                                            Text="Yield (q/ha)"
+                                            VerticalOptions="Center" />
+                                        <Grid
+                                            Grid.Row="4"
+                                            Grid.Column="1"
+                                            Margin="-40,0,0,0"
+                                            ColumnDefinitions="*,*"
+                                            RowDefinitions="Auto,Auto,Auto,Auto"
+                                            VerticalOptions="Center">
+                                            <Label
+                                                Grid.Row="0"
+                                                Grid.ColumnSpan="2"
+                                                FontAttributes="Bold"
+                                                Text="Yield (q/ha)" />
+                                            <Label
+                                                Grid.Row="1"
+                                                Text="T1"
+                                                VerticalOptions="Center" />
+                                            <Entry
+                                                Grid.Row="1"
+                                                Grid.Column="1"
+                                                Placeholder="Enter T1" />
+
+                                            <Label
+                                                Grid.Row="2"
+                                                Text="T2"
+                                                VerticalOptions="Center" />
+                                            <Entry
+                                                Grid.Row="2"
+                                                Grid.Column="1"
+                                                Placeholder="Enter T2" />
+                                        </Grid>
+                                        <Label
+                                            Grid.Row="5"
+                                            LineBreakMode="WordWrap"
+                                            Text="% increase in yield over T2"
+                                            VerticalOptions="Center" />
+                                        <Entry
+                                            Grid.Row="5"
+                                            Grid.Column="1"
+                                            Placeholder="Enter Percentage" />
                                     </Grid>
-                                    <Label Grid.Row="5" Text="% increase in yield over T2" VerticalOptions="Center" LineBreakMode="WordWrap"/>
-                                    <Entry Grid.Row="5" Grid.Column="1" Placeholder="Enter Percentage"/>
-                                </Grid>
-                            </StackLayout>
-                        </ContentView>
+                                </StackLayout>
+                            </ContentView>
 
-                        <!-- FLD Section -->
-                        <ContentView  IsVisible="{Binding IsFLDSelected}">
-                            <StackLayout>
-                                <Label Text="(b) FLD" FontSize="Medium" FontAttributes="Bold" Margin="0,10,0,0"/>
-                                <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto"
-                                  ColumnDefinitions="Auto,*" ColumnSpacing="10" RowSpacing="10">
-                                    <Label Grid.Row="0" Text="Title" VerticalOptions="Center"/>
-                                    <Entry Grid.Row="0" Grid.Column="1" Placeholder="Enter Title" />
+                            <!--  FLD Section  -->
+                            <ContentView IsVisible="{Binding IsFLDSelected}">
+                                <StackLayout>
+                                    <Label
+                                        Margin="0,10,0,0"
+                                        FontAttributes="Bold"
+                                        FontSize="Medium"
+                                        Text="(b) FLD" />
+                                    <Grid
+                                        ColumnDefinitions="Auto,*"
+                                        ColumnSpacing="10"
+                                        RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto"
+                                        RowSpacing="10">
+                                        <Label
+                                            Grid.Row="0"
+                                            Text="Title"
+                                            VerticalOptions="Center" />
+                                        <Entry
+                                            Grid.Row="0"
+                                            Grid.Column="1"
+                                            Placeholder="Enter Title" />
 
-                                    <Label Grid.Row="1" Text="Crop" VerticalOptions="Center"/>
-                                    <Entry Grid.Row="1" Grid.Column="1" Placeholder="Enter Crop"/>
+                                        <Label
+                                            Grid.Row="1"
+                                            Text="Crop"
+                                            VerticalOptions="Center" />
+                                        <Entry
+                                            Grid.Row="1"
+                                            Grid.Column="1"
+                                            Placeholder="Enter Crop" />
 
-                                    <Label Grid.Row="2" Text="Area(ha)" VerticalOptions="Center"/>
-                                    <Entry Grid.Row="2" Grid.Column="1" Placeholder="Enter Area" />
+                                        <Label
+                                            Grid.Row="2"
+                                            Text="Area(ha)"
+                                            VerticalOptions="Center" />
+                                        <Entry
+                                            Grid.Row="2"
+                                            Grid.Column="1"
+                                            Placeholder="Enter Area" />
 
-                                    <Frame Grid.Row="3" Grid.ColumnSpan="2" BorderColor="Gray" CornerRadius="10" Padding="10" Margin="0,0,0,10">
-                                        <StackLayout>
-                                            <Label Text="No. of Trials" FontAttributes="Bold" VerticalOptions="Center"/>
-                                            <Grid ColumnDefinitions="*,*" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto" VerticalOptions="Center">
-                                                <Label Grid.Row="0" Grid.ColumnSpan="2" Text="Male" FontAttributes="Bold" />
-                                                <Label Grid.Row="1" Text="SC/ST" VerticalOptions="Center"/>
-                                                <Entry Grid.Row="1" Grid.Column="1" Placeholder="Enter Number" />
-                                                <Label Grid.Row="2" Text="Gen" VerticalOptions="Center"/>
-                                                <Entry Grid.Row="2" Grid.Column="1" Placeholder="Enter Number" />
+                                        <Frame
+                                            Grid.Row="3"
+                                            Grid.ColumnSpan="2"
+                                            Margin="0,0,0,10"
+                                            Padding="10"
+                                            BorderColor="Gray"
+                                            CornerRadius="10">
+                                            <StackLayout>
+                                                <Label
+                                                    FontAttributes="Bold"
+                                                    Text="No. of Trials"
+                                                    VerticalOptions="Center" />
+                                                <Grid
+                                                    ColumnDefinitions="*,*"
+                                                    RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto"
+                                                    VerticalOptions="Center">
+                                                    <Label
+                                                        Grid.Row="0"
+                                                        Grid.ColumnSpan="2"
+                                                        FontAttributes="Bold"
+                                                        Text="Male" />
+                                                    <Label
+                                                        Grid.Row="1"
+                                                        Text="SC/ST"
+                                                        VerticalOptions="Center" />
+                                                    <Entry
+                                                        Grid.Row="1"
+                                                        Grid.Column="1"
+                                                        Placeholder="Enter Number" />
+                                                    <Label
+                                                        Grid.Row="2"
+                                                        Text="Gen"
+                                                        VerticalOptions="Center" />
+                                                    <Entry
+                                                        Grid.Row="2"
+                                                        Grid.Column="1"
+                                                        Placeholder="Enter Number" />
 
-                                                <Label Grid.Row="3" Grid.ColumnSpan="2" Text="Female" FontAttributes="Bold"/>
-                                                <Label Grid.Row="4" Text="SC/ST" VerticalOptions="Center"/>
-                                                <Entry Grid.Row="4" Grid.Column="1" Placeholder="Enter Number" />
-                                                <Label Grid.Row="5" Text="Gen" VerticalOptions="Center"/>
-                                                <Entry Grid.Row="5" Grid.Column="1" Placeholder="Enter Number" />
-                                            </Grid>
-                                        </StackLayout>
-                                    </Frame>
-                                    <Label Grid.Row="4" Text="Yield (q/ha)" VerticalOptions="Center"/>
-                                    <Grid Grid.Row="4" Grid.Column="1" ColumnDefinitions="*,*" RowDefinitions="Auto,Auto,Auto,Auto" VerticalOptions="Center"  Margin="-40,0,0,0">
-                                        <Label Grid.Row="0" Grid.ColumnSpan="2" Text="Yield (q/ha)" FontAttributes="Bold"/>
-                                        <Label Grid.Row="1" Text="Demo" VerticalOptions="Center"/>
-                                        <Entry Grid.Row="1" Grid.Column="1" Placeholder="Enter Demo"/>
+                                                    <Label
+                                                        Grid.Row="3"
+                                                        Grid.ColumnSpan="2"
+                                                        FontAttributes="Bold"
+                                                        Text="Female" />
+                                                    <Label
+                                                        Grid.Row="4"
+                                                        Text="SC/ST"
+                                                        VerticalOptions="Center" />
+                                                    <Entry
+                                                        Grid.Row="4"
+                                                        Grid.Column="1"
+                                                        Placeholder="Enter Number" />
+                                                    <Label
+                                                        Grid.Row="5"
+                                                        Text="Gen"
+                                                        VerticalOptions="Center" />
+                                                    <Entry
+                                                        Grid.Row="5"
+                                                        Grid.Column="1"
+                                                        Placeholder="Enter Number" />
+                                                </Grid>
+                                            </StackLayout>
+                                        </Frame>
+                                        <Label
+                                            Grid.Row="4"
+                                            Text="Yield (q/ha)"
+                                            VerticalOptions="Center" />
+                                        <Grid
+                                            Grid.Row="4"
+                                            Grid.Column="1"
+                                            Margin="-40,0,0,0"
+                                            ColumnDefinitions="*,*"
+                                            RowDefinitions="Auto,Auto,Auto,Auto"
+                                            VerticalOptions="Center">
+                                            <Label
+                                                Grid.Row="0"
+                                                Grid.ColumnSpan="2"
+                                                FontAttributes="Bold"
+                                                Text="Yield (q/ha)" />
+                                            <Label
+                                                Grid.Row="1"
+                                                Text="Demo"
+                                                VerticalOptions="Center" />
+                                            <Entry
+                                                Grid.Row="1"
+                                                Grid.Column="1"
+                                                Placeholder="Enter Demo" />
 
-                                        <Label Grid.Row="2" Text="Check" VerticalOptions="Center"/>
-                                        <Entry Grid.Row="2" Grid.Column="1" Placeholder="Enter Check"/>
+                                            <Label
+                                                Grid.Row="2"
+                                                Text="Check"
+                                                VerticalOptions="Center" />
+                                            <Entry
+                                                Grid.Row="2"
+                                                Grid.Column="1"
+                                                Placeholder="Enter Check" />
+                                        </Grid>
+                                        <Label
+                                            Grid.Row="5"
+                                            LineBreakMode="WordWrap"
+                                            Text="% increase in yield over T2"
+                                            VerticalOptions="Center" />
+                                        <Entry
+                                            Grid.Row="5"
+                                            Grid.Column="1"
+                                            Placeholder="Enter Percentage" />
                                     </Grid>
-                                    <Label Grid.Row="5" Text="% increase in yield over T2" VerticalOptions="Center" LineBreakMode="WordWrap"/>
-                                    <Entry Grid.Row="5" Grid.Column="1" Placeholder="Enter Percentage"/>
-                                </Grid>
-                            </StackLayout>
-                        </ContentView>
+                                </StackLayout>
+                            </ContentView>
 
-                        <!-- Training Program Section -->
-                        <ContentView IsVisible="{Binding IsTrainingProgramSelected}">
-                            <StackLayout>
-                                <Label Text="(c) Training Program Organized " FontSize="Medium" FontAttributes="Bold" Margin="0,20,0,0"/>
+                            <!--  Training Program Section  -->
+                            <ContentView IsVisible="{Binding IsTrainingProgramSelected}">
+                                <StackLayout>
+                                    <Label
+                                        Margin="0,20,0,0"
+                                        FontAttributes="Bold"
+                                        FontSize="Medium"
+                                        Text="(c) Training Program Organized " />
 
-                                <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto"
-                                  ColumnDefinitions="Auto,*" ColumnSpacing="10" RowSpacing="10">
-                                    <Label Grid.Row="0" Text="SL.No." VerticalOptions="Center"/>
-                                    <Entry Grid.Row="0" Grid.Column="1" Placeholder="Enter SL.No." />
+                                    <Grid
+                                        ColumnDefinitions="Auto,*"
+                                        ColumnSpacing="10"
+                                        RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto"
+                                        RowSpacing="10">
+                                        <Label
+                                            Grid.Row="0"
+                                            Text="SL.No."
+                                            VerticalOptions="Center" />
+                                        <Entry
+                                            Grid.Row="0"
+                                            Grid.Column="1"
+                                            Placeholder="Enter SL.No." />
 
-                                    <Label Grid.Row="1" Text="Title" VerticalOptions="Center"/>
-                                    <Entry Grid.Row="1" Grid.Column="1" Placeholder="Enter Details"/>
+                                        <Label
+                                            Grid.Row="1"
+                                            Text="Title"
+                                            VerticalOptions="Center" />
+                                        <Entry
+                                            Grid.Row="1"
+                                            Grid.Column="1"
+                                            Placeholder="Enter Details" />
 
-                                    <Label Grid.Row="2" Text="Date" VerticalOptions="Center"/>
-                                    <DatePicker Grid.Row="2" Grid.Column="1" />
+                                        <Label
+                                            Grid.Row="2"
+                                            Text="Date"
+                                            VerticalOptions="Center" />
+                                        <DatePicker Grid.Row="2" Grid.Column="1" />
 
-                                    <Label Grid.Row="3" Text="Duration" VerticalOptions="Center"/>
-                                    <Entry Grid.Row="3" Grid.Column="1" Placeholder="Enter Duration"/>
+                                        <Label
+                                            Grid.Row="3"
+                                            Text="Duration"
+                                            VerticalOptions="Center" />
+                                        <Entry
+                                            Grid.Row="3"
+                                            Grid.Column="1"
+                                            Placeholder="Enter Duration" />
 
-                                    <Label Grid.Row="4" Text="No. of Programme" VerticalOptions="Center"/>
-                                    <Entry Grid.Row="4" Grid.Column="1" Placeholder="Enter Number"/>
+                                        <Label
+                                            Grid.Row="4"
+                                            Text="No. of Programme"
+                                            VerticalOptions="Center" />
+                                        <Entry
+                                            Grid.Row="4"
+                                            Grid.Column="1"
+                                            Placeholder="Enter Number" />
 
-                                    <Label Grid.Row="5" Text="No. of Programme" VerticalOptions="Center"/>
-                                    <Entry Grid.Row="5" Grid.Column="1" Placeholder="Enter Number"/>
-                                </Grid>
-                            </StackLayout>
-                        </ContentView>
+                                        <Label
+                                            Grid.Row="5"
+                                            Text="No. of Programme"
+                                            VerticalOptions="Center" />
+                                        <Entry
+                                            Grid.Row="5"
+                                            Grid.Column="1"
+                                            Placeholder="Enter Number" />
+                                    </Grid>
+                                </StackLayout>
+                            </ContentView>
 
-                        <!-- Additional Activities section -->
-                        <ContentView IsVisible="{Binding IsOtherActivitiesSelected}">
-                            <StackLayout>
-                                <Label Text="(d) Any other activities" FontSize="Medium" FontAttributes="Bold" Margin="0,20,0,0"/>
-                                <Frame BorderColor="Gray" HasShadow="True" Padding="10" Margin="0,10,0,0">
-                                    <Editor Placeholder="Enter additional activities here..." HeightRequest="100" />
-                                </Frame>
-                            </StackLayout>
-                        </ContentView>
+                            <!--  Additional Activities section  -->
+                            <ContentView IsVisible="{Binding IsOtherActivitiesSelected}">
+                                <StackLayout>
+                                    <Label
+                                        Margin="0,20,0,0"
+                                        FontAttributes="Bold"
+                                        FontSize="Medium"
+                                        Text="(d) Any other activities" />
+                                    <Frame
+                                        Margin="0,10,0,0"
+                                        Padding="10"
+                                        BorderColor="Gray"
+                                        HasShadow="True">
+                                        <Editor HeightRequest="100" Placeholder="Enter additional activities here..." />
+                                    </Frame>
+                                </StackLayout>
+                            </ContentView>
 
 
-                    </StackLayout>
-                </Border>
-                <!-- Submit Button -->
-                <Grid IsVisible="{Binding IsBorderVisible}">
-                    <Button Text="Submit" WidthRequest="150" HorizontalOptions="Center" />
-                </Grid>
-            </StackLayout>
-        </ScrollView>
+                        </StackLayout>
+                    </Border>
+                    <!--  Submit Button  -->
+                    <Grid IsVisible="{Binding IsBorderVisible}">
+                        <Button
+                            HorizontalOptions="Center"
+                            Text="Submit"
+                            WidthRequest="150" />
+                    </Grid>
+                </StackLayout>
+            </ScrollView>
+        </StackLayout>
     </ContentPage.Content>
 </ContentPage>

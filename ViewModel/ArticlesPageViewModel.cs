@@ -4,7 +4,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.Maui.Controls;
 
-namespace UAS.ViewModels
+namespace UAS.ViewModel
 {
     public partial class ArticlesPageViewModel : BaseViewModel
     {

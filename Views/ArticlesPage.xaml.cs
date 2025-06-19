@@ -1,6 +1,6 @@
 using Microsoft.Maui.Controls;
 using System;
-using UAS.ViewModels;
+using UAS.ViewModel;
 
 namespace UAS.Views
 {
