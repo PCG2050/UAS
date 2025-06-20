@@ -17,6 +17,9 @@ namespace UAS
                     Routing.RegisterRoute($"Page{i}", pageType);
                 }
             }
+            Routing.RegisterRoute(nameof(EntryPage), typeof(EntryPage));
+            Routing.RegisterRoute(nameof(HistoryPage), typeof(HistoryPage));
+            Routing.RegisterRoute(nameof(EditHistoryItemPage), typeof(EditHistoryItemPage));
         }
 
         private void LoadUserInfo()

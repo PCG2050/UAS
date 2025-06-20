@@ -1,0 +1,331 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="UAS.Views.HistoryPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:data="clr-namespace:UAS.Data"
+    xmlns:local="clr-namespace:UAS.Views"
+    xmlns:vm="clr-namespace:UAS.ViewModel"
+    Title="History">
+
+    <ContentPage.BindingContext>
+        <!--  Instantiate the HistoryPageViewModel for this page's data context  -->
+        <vm:HistoryPageViewModel />
+    </ContentPage.BindingContext>
+
+    <ContentPage.Resources>
+        <!--  Define a converter to help with alternating row background colors  -->
+        <local:OddEvenConverter x:Key="OddEvenConverter" />
+    </ContentPage.Resources>
+
+    <!--  Main layout of the page  -->
+    <VerticalStackLayout Padding="10" Spacing="10">
+        <!--  Date Filter Input and Clear Button  -->
+        <Frame
+            Padding="10"
+            BackgroundColor="{AppThemeBinding Light=White,
+                                              Dark=#333333}"
+            CornerRadius="8"
+            HasShadow="True">
+            <Grid ColumnDefinitions="*,Auto">
+                <DatePicker
+                    Grid.Column="0"
+                    Date="{Binding SelectedFilterDate, Mode=TwoWay}"
+                    Format="yyyy-MM-dd"
+                    MaximumDate="{x:Static vm:HistoryPageViewModel.MaxFilterDate}"
+                    MinimumDate="{x:Static vm:HistoryPageViewModel.MinFilterDate}"
+                    
+                    TextColor="{AppThemeBinding Light=Black,
+                                                Dark=White}" />
+                <Button
+                    Grid.Column="1"
+                    Margin="10,0,0,0"
+                    Padding="10,5"
+                    BackgroundColor="Red"
+                    Command="{Binding ClearDateFilterCommand}"
+                    CornerRadius="5"
+                    Text="Clear"
+                    TextColor="White" />
+            </Grid>
+        </Frame>
+
+        <!--  Main container for synchronized horizontal scrolling  -->
+        <!--
+            All content inside this ScrollView (header and CollectionView items)
+            will scroll together horizontally.
+        -->
+        <ScrollView Orientation="Horizontal" VerticalOptions="FillAndExpand">
+            <!--  CollectionView for displaying data rows and header  -->
+            <CollectionView ItemsSource="{Binding HistoryItems}" SelectionMode="None">
+                <!--  Disable row selection  -->
+
+                <!--  CollectionView Header Template (for the table headings)  -->
+                <!--  The header's Grid ColumnDefinitions MUST match the ItemTemplate's Grid.  -->
+                <CollectionView.Header>
+                    <Grid
+                        Padding="0"
+                        BackgroundColor="#E0E0E0"
+                        ColumnDefinitions="100,100,150,150,120,200,120,120,80"
+                        ColumnSpacing="0"
+                        RowSpacing="0">
+                        <Border
+                            Grid.Column="0"
+                            Stroke="LightGray"
+                            StrokeThickness="1">
+                            <Label
+                                Padding="10"
+                                FontAttributes="Bold"
+                                HorizontalOptions="Center"
+                                Text="Date"
+                                VerticalOptions="Center" />
+                        </Border>
+                        <Border
+                            Grid.Column="1"
+                            Stroke="LightGray"
+                            StrokeThickness="1">
+                            <Label
+                                Padding="10"
+                                FontAttributes="Bold"
+                                HorizontalOptions="Center"
+                                Text="Time"
+                                VerticalOptions="Center" />
+                        </Border>
+                        <Border
+                            Grid.Column="2"
+                            Stroke="LightGray"
+                            StrokeThickness="1">
+                            <Label
+                                Padding="10"
+                                FontAttributes="Bold"
+                                HorizontalOptions="Center"
+                                Text="Event Name"
+                                VerticalOptions="Center" />
+                        </Border>
+                        <Border
+                            Grid.Column="3"
+                            Stroke="LightGray"
+                            StrokeThickness="1">
+                            <Label
+                                Padding="10"
+                                FontAttributes="Bold"
+                                HorizontalOptions="Center"
+                                Text="Location"
+                                VerticalOptions="Center" />
+                        </Border>
+                        <Border
+                            Grid.Column="4"
+                            Stroke="LightGray"
+                            StrokeThickness="1">
+                            <Label
+                                Padding="10"
+                                FontAttributes="Bold"
+                                HorizontalOptions="Center"
+                                Text="Status"
+                                VerticalOptions="Center" />
+                        </Border>
+                        <Border
+                            Grid.Column="5"
+                            Stroke="LightGray"
+                            StrokeThickness="1">
+                            <Label
+                                Padding="10"
+                                FontAttributes="Bold"
+                                HorizontalOptions="Center"
+                                Text="Notes"
+                                VerticalOptions="Center" />
+                        </Border>
+                        <Border
+                            Grid.Column="6"
+                            Stroke="LightGray"
+                            StrokeThickness="1">
+                            <Label
+                                Padding="10"
+                                FontAttributes="Bold"
+                                HorizontalOptions="Center"
+                                Text="Category"
+                                VerticalOptions="Center" />
+                        </Border>
+                        <Border
+                            Grid.Column="7"
+                            Stroke="LightGray"
+                            StrokeThickness="1">
+                            <Label
+                                Padding="10"
+                                FontAttributes="Bold"
+                                HorizontalOptions="Center"
+                                Text="Priority"
+                                VerticalOptions="Center" />
+                        </Border>
+                        <Border
+                            Grid.Column="8"
+                            Stroke="LightGray"
+                            StrokeThickness="1">
+                            <Label
+                                Padding="10"
+                                FontAttributes="Bold"
+                                HorizontalOptions="Center"
+                                Text="Edit"
+                                VerticalOptions="Center" />
+                        </Border>
+                    </Grid>
+                </CollectionView.Header>
+
+                <CollectionView.ItemsLayout>
+                    <!--  LinearItemsLayout for vertical stacking of rows.  -->
+                    <LinearItemsLayout ItemSpacing="0" Orientation="Vertical" />
+                </CollectionView.ItemsLayout>
+
+                <CollectionView.ItemTemplate>
+                    <!--  DataTemplate defines the visual structure of each HistoryItem (row)  -->
+                    <DataTemplate x:DataType="data:HistoryItem">
+                        <!--
+                            Inner Grid to define columns for each individual row.
+                            Its ColumnDefinitions MUST match the Header's Grid.
+                        -->
+                        <Grid
+                            ColumnDefinitions="100,100,150,150,120,200,120,120,80"
+                            ColumnSpacing="0"
+                            RowSpacing="0">
+                            <!--
+                                Apply styling for alternating row colors using a DataTrigger and the OddEvenConverter.
+                                This makes the table more readable.
+                            -->
+                            <Grid.Style>
+                                <Style TargetType="Grid">
+                                    <Style.Triggers>
+                                        <!--  Trigger when the HistoryItem's Id (converted by OddEvenConverter) is true (odd row)  -->
+                                        <DataTrigger
+                                            Binding="{Binding Id, Converter={StaticResource OddEvenConverter}}"
+                                            TargetType="Grid"
+                                            Value="True">
+                                            <Setter Property="BackgroundColor" Value="{AppThemeBinding Light=LightGray, Dark=Gray}" />
+                                        </DataTrigger>
+                                        <!--  Default background for even rows  -->
+                                        <DataTrigger
+                                            Binding="{Binding Id, Converter={StaticResource OddEvenConverter}}"
+                                            TargetType="Grid"
+                                            Value="False">
+                                            <Setter Property="BackgroundColor" Value="{AppThemeBinding Light=White, Dark=DarkGray}" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Grid.Style>
+
+                            <!--  Individual cells within the row  -->
+                            <!--  Each cell is a Border containing a Label to display the data  -->
+                            <Border
+                                Grid.Column="0"
+                                Margin="-0.5"
+                                Stroke="LightGray"
+                                StrokeThickness="1">
+                                <Label
+                                    Padding="10"
+                                    HorizontalOptions="Center"
+                                    Text="{Binding Date, StringFormat='{0:yyyy-MM-dd}'}"
+                                    VerticalOptions="Center" />
+                            </Border>
+                            <Border
+                                Grid.Column="1"
+                                Margin="-0.5"
+                                Stroke="LightGray"
+                                StrokeThickness="1">
+                                <Label
+                                    Padding="10"
+                                    HorizontalOptions="Center"
+                                    Text="{Binding Time}"
+                                    VerticalOptions="Center" />
+                            </Border>
+                            <Border
+                                Grid.Column="2"
+                                Margin="-0.5"
+                                Stroke="LightGray"
+                                StrokeThickness="1">
+                                <Label
+                                    Padding="10"
+                                    HorizontalOptions="Center"
+                                    Text="{Binding EventName}"
+                                    VerticalOptions="Center" />
+                            </Border>
+                            <Border
+                                Grid.Column="3"
+                                Margin="-0.5"
+                                Stroke="LightGray"
+                                StrokeThickness="1">
+                                <Label
+                                    Padding="10"
+                                    HorizontalOptions="Center"
+                                    Text="{Binding Location}"
+                                    VerticalOptions="Center" />
+                            </Border>
+                            <Border
+                                Grid.Column="4"
+                                Margin="-0.5"
+                                Stroke="LightGray"
+                                StrokeThickness="1">
+                                <Label
+                                    Padding="10"
+                                    HorizontalOptions="Center"
+                                    Text="{Binding Status}"
+                                    VerticalOptions="Center" />
+                            </Border>
+                            <Border
+                                Grid.Column="5"
+                                Margin="-0.5"
+                                Stroke="LightGray"
+                                StrokeThickness="1">
+                                <Label
+                                    Padding="10"
+                                    HorizontalOptions="Center"
+                                    Text="{Binding Notes}"
+                                    VerticalOptions="Center" />
+                            </Border>
+                            <Border
+                                Grid.Column="6"
+                                Margin="-0.5"
+                                Stroke="LightGray"
+                                StrokeThickness="1">
+                                <Label
+                                    Padding="10"
+                                    HorizontalOptions="Center"
+                                    Text="{Binding Category}"
+                                    VerticalOptions="Center" />
+                            </Border>
+                            <Border
+                                Grid.Column="7"
+                                Margin="-0.5"
+                                Stroke="LightGray"
+                                StrokeThickness="1">
+                                <Label
+                                    Padding="10"
+                                    HorizontalOptions="Center"
+                                    Text="{Binding Priority}"
+                                    VerticalOptions="Center" />
+                            </Border>
+
+                            <!--  Edit Button Cell  -->
+                            <Border
+                                Grid.Column="8"
+                                Margin="-0.5"
+                                Stroke="LightGray"
+                                StrokeThickness="1">
+                                <!--  Button to trigger the edit command in the ViewModel  -->
+                                <Button
+                                    Margin="5"
+                                    Padding="5"
+                                    BackgroundColor="Blue"
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type vm:HistoryPageViewModel}}, Path=EditHistoryItemCommand}"
+                                    CommandParameter="{Binding .}"
+                                    CornerRadius="5"
+                                    FontSize="Small"
+                                    HorizontalOptions="Center"
+                                    Text="Edit"
+                                    TextColor="White"
+                                    VerticalOptions="Center" />
+                            </Border>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </ScrollView>
+    </VerticalStackLayout>
+</ContentPage>

@@ -145,6 +145,18 @@ namespace UAS.ViewModel
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-       
+        [RelayCommand]
+        private async Task NewTrainingEntry()
+        {
+            await Shell.Current.GoToAsync(nameof(EntryPage));
+        }
+
+        [RelayCommand]
+        private async Task History()
+        {
+            await Shell.Current.GoToAsync(nameof(HistoryPage));
+        }
+
+
     }
 }

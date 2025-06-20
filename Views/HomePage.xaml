@@ -19,11 +19,18 @@
                 FontAttributes="Bold"
                 FontSize="Medium"
                 HorizontalOptions="Center"
-                Text="Welcome! User &#x0a;Select the Training Unit to enter the Data" />
+                Text="Welcome! UserName" />
+            <Label
+                Margin="0,50,0,0"
+                FontAttributes="Bold"
+                FontSize="Medium"
+                HorizontalOptions="Center"
+                Text="Select Department to Entry Data" />
+
 
             <!--  Department Picker  -->
             <Frame
-                Margin="0,50,0,0"
+                Margin="0,70,0,0"
                 Padding="0"
                 BackgroundColor="White"
                 BorderColor="Black"
@@ -158,7 +165,7 @@
 
 
 
-            <ScrollView>
+            <!--<ScrollView>
                 <StackLayout>
 
                     <Label
@@ -190,7 +197,7 @@
                             </handlers:BorderlessPicker.ItemsSource>
                         </handlers:BorderlessPicker>
                     </Frame>
-                    <!--  Border that wraps the content and its visibility  -->
+                      Border that wraps the content and its visibility
                     <Border
                         Margin="7"
                         BackgroundColor="White"
@@ -199,7 +206,7 @@
                         StrokeThickness="2">
                         <StackLayout Padding="10">
 
-                            <!--  OFT Section  -->
+                              OFT Section
                             <ContentView IsVisible="{Binding IsOFTSelected}">
                                 <StackLayout>
                                     <Label
@@ -350,7 +357,7 @@
                                 </StackLayout>
                             </ContentView>
 
-                            <!--  FLD Section  -->
+                              FLD Section
                             <ContentView IsVisible="{Binding IsFLDSelected}">
                                 <StackLayout>
                                     <Label
@@ -499,7 +506,7 @@
                                 </StackLayout>
                             </ContentView>
 
-                            <!--  Training Program Section  -->
+                              Training Program Section
                             <ContentView IsVisible="{Binding IsTrainingProgramSelected}">
                                 <StackLayout>
                                     <Label
@@ -567,7 +574,7 @@
                                 </StackLayout>
                             </ContentView>
 
-                            <!--  Additional Activities section  -->
+                              Additional Activities section
                             <ContentView IsVisible="{Binding IsOtherActivitiesSelected}">
                                 <StackLayout>
                                     <Label
@@ -588,7 +595,7 @@
 
                         </StackLayout>
                     </Border>
-                    <!--  Submit Button  -->
+                      Submit Button
                     <Grid IsVisible="{Binding IsBorderVisible}">
                         <Button
                             HorizontalOptions="Center"
@@ -596,7 +603,7 @@
                             WidthRequest="150" />
                     </Grid>
                 </StackLayout>
-            </ScrollView>
+            </ScrollView>-->
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

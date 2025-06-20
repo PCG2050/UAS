@@ -156,7 +156,7 @@
                 </Frame>
             </StackLayout>
 
-            <!--  Department Picker  -->
+            <!--  Department Picker  --><!--
             <Frame
                 Grid.Row="3"
                 Margin="0,20,0,0"
@@ -181,7 +181,7 @@
                 </StackLayout>
             </Frame>
 
-            <!--  Sub-Department Picker  -->
+            --><!--  Sub-Department Picker  --><!--
             <Frame
                 Grid.Row="4"
                 Margin="0,20,0,0"
@@ -204,7 +204,7 @@
                         HorizontalTextAlignment="Center"
                         ItemsSource="{Binding SubDepartments}" />
                 </StackLayout>
-            </Frame>
+            </Frame>-->
 
             <!--  Terms and Conditions  -->
             <StackLayout

@@ -22,13 +22,18 @@ namespace UAS
             builder.Services.AddSingleton<HomePage>();
             builder.Services.AddTransient<SignUpPage>();
             builder.Services.AddSingleton<TermsAndConditionsPage>();
-
             //ViewModels
             builder.Services.AddSingleton<LoginViewModel>();
 
+            
 #if DEBUG
     		builder.Logging.AddDebug();
 #endif
+            // Register ViewModels and Pages for dependency injection
+            builder.Services.AddSingleton<HistoryPageViewModel>();
+            builder.Services.AddSingleton<HistoryPage>();
+            builder.Services.AddTransient<EditHistoryItemViewModel>(); // Transient as it's created per navigation
+            builder.Services.AddTransient<EditHistoryItemPage>();
 
             return builder.Build();
         }

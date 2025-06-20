@@ -12,6 +12,6 @@ namespace UAS.Views
             BindingContext = new HomePageViewModel();
         }
             
-       private async void 
+      
     }
 }

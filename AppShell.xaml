@@ -23,6 +23,12 @@
             ContentTemplate="{DataTemplate views:HomePage}"
             Icon="{x:Static models:Icons.Dashboard}"
             Route="Home" />
+
+        <ShellContent
+            Title="History"
+            ContentTemplate="{DataTemplate views:HistoryPage}"
+            Icon="{x:Static models:Icons.AboutUs}"
+            Route="HistoryPage" />
         <ShellContent
             Title="Articles"
             ContentTemplate="{DataTemplate views:ArticlesPage}"
@@ -96,4 +102,6 @@
                 Text="SIGN OUT" />
         </StackLayout>
     </Shell.FlyoutFooter>
+
+    
 </Shell>

@@ -117,7 +117,16 @@
 	  <MauiXaml Update="Views\ContactUsPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Views\EditHistoryItemPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\EntryPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\ForgotPasswordPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\HistoryPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\HomePage.xaml">
@@ -258,6 +267,18 @@
 	  <MauiXaml Update="Views\TermsAndConditionsPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Views\Departments\1.FTI\" />
+	  <Folder Include="Views\Departments\2.STU\" />
+	  <Folder Include="Views\Departments\3.FIU\" />
+	  <Folder Include="Views\Departments\4.IBT&amp;VA\" />
+	  <Folder Include="Views\Departments\5.ATIC\" />
+	  <Folder Include="Views\Departments\6.DEU\" />
+	  <Folder Include="Views\Departments\7.ASM\" />
+	  <Folder Include="Views\Departments\8.NAEP\" />
+	  <Folder Include="Views\Departments\9.EEU\" />
 	</ItemGroup>
 
 </Project>
