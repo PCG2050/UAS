@@ -29,10 +29,10 @@ namespace UAS
 #if DEBUG
     		builder.Logging.AddDebug();
 #endif
-            // Register ViewModels and Pages for dependency injection
+            
             builder.Services.AddSingleton<HistoryPageViewModel>();
             builder.Services.AddSingleton<HistoryPage>();
-            builder.Services.AddTransient<EditHistoryItemViewModel>(); // Transient as it's created per navigation
+            builder.Services.AddTransient<EditHistoryItemViewModel>();
             builder.Services.AddTransient<EditHistoryItemPage>();
 
             return builder.Build();
